@@ -1,0 +1,55 @@
+
+  <h2>個別釣果マップ</h2></br>
+
+  <style>
+    #map {
+      width: 97%;
+      height: 400px;
+      background-color: grey;
+      margin: 5px auto 20px auto;
+    }
+  </style>
+  <div id="map"></div>
+
+  <div class="hunt_content">
+    <ul>
+      <li>
+        <%= @hunt.created_at.strftime("%Y/%m/%d %H:%M") %>：<%= @hunt.user.nickname %></br>
+        <% if @hunt.user_id == current_user.id %>
+          [memo](自分のメモのみ表示される)</br>
+          <%= @hunt.memo %></br>
+        <% end %>
+        <%= image_tag @hunt.fish_photo.url, alt: 'No image',size: '230' %>
+        <%= image_tag @hunt.fly_photo.url, alt: 'No image',size: '230' %>
+        <%= image_tag @hunt.spot_photo.url, alt: 'No image',size: '230' %>
+      </li>
+    </ul>
+  </div>
+
+<script>
+  function initMap() {
+    var yozawa = {lat:35.751834, lng:139.179959};
+    var myLatLng = {lat:<%= @hunt.latitude %>, lng:<%= @hunt.longitude %>}
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: yozawa
+    });
+
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      icon: {
+        fillColor: "#FF0000",    //塗り潰し色
+        fillOpacity: 0.3,        //塗り潰し透過率
+        path: google.maps.SymbolPath.CIRCLE, //円を指定
+        scale: 15,                //円のサイズ
+        strokeColor: "#ffffff",  //枠の色
+        strokeWeight: 1.0        //枠の透過率
+      },
+    });
+  }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= @apikey %>&callback=initMap">
+</script>

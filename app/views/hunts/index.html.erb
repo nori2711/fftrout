@@ -1,0 +1,51 @@
+<div>
+  <h2>釣果マップ</h2></br>
+
+  <style>
+    #map {
+      width: 97%;
+      height: 400px;
+      background-color: grey;
+      margin: 5px auto 20px auto;
+    }
+  </style>
+  <div id="map"></div>
+
+<script>
+  function initMap() {
+    var yozawa = {lat:35.751834, lng:139.179959};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: yozawa
+    });
+
+    setMarkers(map);
+  }
+
+  var hunts_lat = <%= @hunt_lat %>;
+  var hunts_lng = <%= @hunt_lng %>;
+
+  // マーカー情報の作成
+  function setMarkers(map) {
+    for (var i = 0; i < hunts_lat.length; i++) {
+      var hunt_lat = hunts_lat[i];
+      var hunt_lng = hunts_lng[i];
+      var marker = new google.maps.Marker({
+        position: {lat: hunt_lat, lng: hunt_lng},
+        map: map,
+        icon: {
+          fillColor: "#FF0000",    //塗り潰し色
+          fillOpacity: 0.5,        //塗り潰し透過率
+          path: google.maps.SymbolPath.CIRCLE, //円を指定
+          scale: 4,                //円のサイズ
+          strokeColor: "#ffffff",  //枠の色
+          strokeWeight: 1.0        //枠の透過率
+        },
+      });
+    }
+  }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= @apikey %>&callback=initMap">
+</script>
