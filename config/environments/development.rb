@@ -40,7 +40,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # 認証メールを送った際の認証リンクのURLを設定
-  config.action_mailer.default_url_options = { host: 'https://fftrout.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000', port; 3000 }
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :enable_starttls_auto => true,
