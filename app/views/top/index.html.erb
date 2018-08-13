@@ -1,10 +1,10 @@
-<p><%= link_to "釣果の登録", "/hunts/new", method: :get %><c style="font-size: 5px">(現在地情報を利用します)</c></p>
+<p><%= link_to "釣果の登録", "/hunts/new", method: :get %><c style="font-size: 11px">(現在地情報を利用)</c></p>
 <p><%= link_to "釣果マップを表示", "/hunts/", method: :get %></p>
 <div class="hunt_content">
   <ul>
     <% @hunts.each do |hunt| %>
       <li>
-        <%= time_ago_in_words hunt.created_at %>前：<%= hunt.user.nickname %><%= link_to "マップ", "/hunts/#{hunt.id}", method: :get %></br>
+        <%= time_ago_in_words hunt.created_at %>前：<%= truncate(hunt.user.email, length: 4, omission:'') %><%= link_to "マップ", "/hunts/#{hunt.id}", method: :get %></br>
         <%= image_tag hunt.fish_photo.url, alt: 'No image',size: '60' %>
         <%= image_tag hunt.fly_photo.url, alt: 'No image',size: '60' %>
         <%= image_tag hunt.spot_photo.url, alt: 'No image',size: '60' %>
