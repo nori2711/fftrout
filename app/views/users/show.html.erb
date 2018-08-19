@@ -4,7 +4,7 @@
   <ul>
     <% @hunts.each do |hunt| %>
       <li>
-        <%= hunt.created_at.strftime("%Y/%m/%d %H:%M") %><%= link_to "マップ", "/hunts/#{hunt.id}", method: :get %></br>
+        <%= (hunt.created_at + 60*60*9).strftime("%Y/%m/%d %H:%M") %> <%= link_to "詳細", "/hunts/#{hunt.id}", method: :get %></br>
         <%= image_tag hunt.fish_photo.url, alt: 'No image',size: '30' %>
         <%= image_tag hunt.fly_photo.url, alt: 'No image',size: '30' %>
         <%= image_tag hunt.spot_photo.url, alt: 'No image',size: '30' %>
