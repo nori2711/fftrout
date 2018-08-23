@@ -11,6 +11,14 @@
   </style>
   <div id="map"></div>
 
+<div style="font-size: 14px">
+  01:事務所下、03:坂東橋、05:立岩</br>
+  07:養沢センター上、09:天王岩</br>
+  12:早淵、14:神谷橋、16:遠藤前</br>
+  19:西平、22:製材所、24:高橋</br>
+  26:赤保谷
+</div>
+
 <script>
   function initMap() {
     var yozawa = {lat:35.751834, lng:139.179959};
@@ -25,9 +33,43 @@
 
   var hunts_lat = <%= @hunt_lat %>;
   var hunts_lng = <%= @hunt_lng %>;
+  var yozawa_points = [
+    ['01', 35.742588, 139.189376],
+    ['03', 35.744969, 139.189497],
+    ['05', 35.746153, 139.187469],
+    ['07', 35.746823, 139.185130],
+    ['09', 35.748639, 139.183521],
+    ['12', 35.752455, 139.182087],
+    ['14', 35.753593, 139.179685],
+    ['16', 35.754625, 139.178891],
+    ['19', 35.754359, 139.175916],
+    ['22', 35.753584, 139.173345],
+    ['24', 35.755613, 139.172040],
+    ['26', 35.757742, 139.171831]
+  ];
 
   // マーカー情報の作成
   function setMarkers(map) {
+    for (var i = 0; i < yozawa_points.length; i++) {
+      var yozawa_point = yozawa_points[i];
+      var marker = new google.maps.Marker({
+        position: {lat: yozawa_point[1], lng: yozawa_point[2]},
+        map: map,
+        icon: {
+          fillColor: "#000000",    //塗り潰し色
+          fillOpacity: 0.5,        //塗り潰し透過率
+          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //マーカーを指定
+          scale: 3,                //マーカーのサイズ
+          strokeColor: "#ffffff",  //枠の色
+          strokeWeight: 0.4        //枠の透過率
+        },
+        label: {
+          text: yozawa_point[0],
+          color: "#5f5f5f",
+          fontSize: "1em"
+        }
+      });
+    }
     for (var i = 0; i < hunts_lat.length; i++) {
       var hunt_lat = hunts_lat[i];
       var hunt_lng = hunts_lng[i];

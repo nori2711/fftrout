@@ -1,10 +1,10 @@
 <h2>マイページ</h2>
-<%= link_to "釣果マップを表示", "/hunts/", method: :get %>
+<%= link_to "釣果マップを表示>", users_path(current_user), method: :get %>
 <div class="hunt_content">
   <ul>
     <% @hunts.each do |hunt| %>
       <li>
-        <%= (hunt.created_at + 60*60*9).strftime("%Y/%m/%d %H:%M") %> <%= link_to "詳細", "/hunts/#{hunt.id}", method: :get %></br>
+        <%= (hunt.created_at + 60*60*9).strftime("%Y/%m/%d %H:%M") %> <%= link_to "詳細>", "/hunts/#{hunt.id}", method: :get %></br>
         <%= image_tag hunt.fish_photo.url, alt: 'No image',size: '30' %>
         <%= image_tag hunt.fly_photo.url, alt: 'No image',size: '30' %>
         <%= image_tag hunt.spot_photo.url, alt: 'No image',size: '30' %>
