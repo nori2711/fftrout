@@ -8,7 +8,7 @@
   <ul>
     <% @hunts.each do |hunt| %>
       <li>
-        <%= time_ago_in_words hunt.created_at %>前：<%= truncate(hunt.user.nickname, length: 4, omission:'') %>： <%= link_to "マップ表示>", "/hunts/#{hunt.id}", method: :get %></br>
+        <%= time_ago_in_words hunt.created_at %>前：<%= hunt.user.nickname %> <%= link_to "マップ表示>", "/hunts/#{hunt.id}", method: :get %></br>
         <a class="photo" href= <%= hunt.fish_photo.url %> data-lightbox="abc" data-title="魚写真">
           <%= image_tag hunt.fish_photo.url, alt: '',size: '60' %>
         </a>
