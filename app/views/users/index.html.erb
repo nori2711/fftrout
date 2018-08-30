@@ -1,4 +1,8 @@
-<div>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
+
+<div class="posting_form top_content">
   <h2>釣果マップ</h2></br>
 
   <style>
@@ -11,12 +15,50 @@
   </style>
   <div id="map"></div>
 
-<div style="font-size: 14px">
-  01:事務所下、03:坂東橋、05:立岩</br>
-  07:養沢センター上、09:天王岩</br>
-  12:早淵、14:神谷橋、16:遠藤前</br>
-  19:西平、22:製材所、24:高橋</br>
-  26:赤保谷
+  <%= search_form_for @search do |f| %>
+    <div>
+      <%= f.label "検索開始日", style: 'color: #828282' %>
+      <%= f.date_field :created_at_gteq, class: "form-control" %>
+      <%= f.label "終了日", style: 'color: #828282; margin: 7px 0 5px 0' %>
+      <%= f.date_field :created_at_lteq, class: "form-control" %>
+    </div>
+    <div class="action">
+      <%= f.submit "検索", class: "btn btn--block" do %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% @riverpoints.each do |river| %>
+    <%= river.riverpoint_number %>：<%= river.riverpoint_name %> <%= link_to ">絞込み", "/users.#{current_user.id}?riverpoint_latitude=#{river.riverpoint_latitude}&riverpoint_longitude=#{river.riverpoint_longitude}", method: :get %></br>
+  <% end %>
+</div>
+
+<div style="font-size: 12px; color: #828282">
+  ＜検索について＞</br>
+  日付の基準は00:00です</br>
+  2018/8/1の1日だけ検索する場合は2018/8/1〜2018/8/2と入力</br>
+  日付検索の結果を場所で絞り込めます（周辺約200m）</br>
+  場所検索の結果を日付で絞り込むことはできません</br>
+  </br>
+</div>
+
+<div class="hunt_content">
+  <ul>
+    <% @hunts.each do |hunt| %>
+      <li>
+        <%= time_ago_in_words hunt.created_at %>前：<%= hunt.user.nickname %> <%= link_to ">マップ表示", "/hunts/#{hunt.id}", method: :get %></br>
+        <a class="photo" href= <%= hunt.fish_photo.url %> data-lightbox="abc" data-title="魚写真">
+          <%= image_tag hunt.fish_photo.url, alt: '',size: '60' %>
+        </a>
+        <a class="photo" href= <%= hunt.fly_photo.url %> data-lightbox="abc" data-title="Fly写真">
+          <%= image_tag hunt.fly_photo.url, alt: '',size: '60' %>
+        </a>
+        <a class="photo" href= <%= hunt.spot_photo.url %> data-lightbox="abc" data-title="場所写真">
+          <%= image_tag hunt.spot_photo.url, alt: '',size: '60' %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <script>
