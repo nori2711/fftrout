@@ -17,9 +17,9 @@
   <%= search_form_for @search do |f| %>
     <div>
       <%= f.label "検索開始日", style: 'color: #828282' %>
-      <%= f.date_field :created_at_gteq, class: "form-control", style: 'width: 180px;height: 15px;font-size: 1em;' %>
+      <%= f.date_field :created_at_gteq, class: "form-control" %>
       <%= f.label "終了日", style: 'color: #828282; margin: 7px 0 5px 0' %>
-      <%= f.date_field :created_at_lteq, class: "form-control", style: 'width: 180px;height: 15px;font-size: 1em' %>
+      <%= f.date_field :created_at_lteq, class: "form-control" %>
     </div>
     <div class="action">
       <%= f.submit "検索", class: "btn btn--block" do %>
