@@ -29,20 +29,10 @@
   function initMap() {
     var yozawa = {lat:35.751834, lng:139.179959};
     var myLatLng = {lat:<%= @hunt.latitude %>, lng:<%= @hunt.longitude %>}
-    var yozawa_points = [
-      ['事務所下', 35.742588, 139.189376],
-      ['坂東橋', 35.744969, 139.189497],
-      ['立岩', 35.746153, 139.187469],
-      ['養沢センター上', 35.746823, 139.185130],
-      ['天王岩', 35.748639, 139.183521],
-      ['早淵', 35.752455, 139.182087],
-      ['神谷橋', 35.753593, 139.179685],
-      ['遠藤前', 35.754625, 139.178891],
-      ['西平', 35.754359, 139.175916],
-      ['製材所', 35.753584, 139.173345],
-      ['高橋', 35.755613, 139.172040],
-      ['赤保谷', 35.757742, 139.171831]
-    ];
+    var riverpoints_lat = <%= @riverpoint_lat %>;
+    var riverpoints_lng = <%= @riverpoint_lng %>;
+    // rawメソッドで配列「"」のエスケープ処理をおこなわない
+    var riverpoints_name = <%= raw @riverpoint_name %>;
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 14,
@@ -61,21 +51,23 @@
         strokeWeight: 1.0        //枠の透過率
       },
     });
-    for (var i = 0; i < yozawa_points.length; i++) {
-      var yozawa_point = yozawa_points[i];
+    for (var i = 0; i < riverpoints_lat.length; i++) {
+      var riverpoint_lat = riverpoints_lat[i];
+      var riverpoint_lng = riverpoints_lng[i];
+      var riverpoint_name = riverpoints_name[i];
       var marker = new google.maps.Marker({
-        position: {lat: yozawa_point[1], lng: yozawa_point[2]},
+        position: {lat: riverpoint_lat, lng: riverpoint_lng},
         map: map,
         icon: {
           fillColor: "#000000",    //塗り潰し色
           fillOpacity: 0.5,        //塗り潰し透過率
           path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, //マーカーを指定
-          scale: 0,                //マーカーのサイズ
+          scale: 3,                //マーカーのサイズ
           strokeColor: "#ffffff",  //枠の色
           strokeWeight: 0.4        //枠の透過率
         },
         label: {
-          text: yozawa_point[0],
+          text: riverpoint_name,
           color: "#5f5f5f",
           fontSize: "1em"
         }

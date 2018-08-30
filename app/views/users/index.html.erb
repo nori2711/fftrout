@@ -33,27 +33,19 @@
 
   var hunts_lat = <%= @hunt_lat %>;
   var hunts_lng = <%= @hunt_lng %>;
-  var yozawa_points = [
-    ['01', 35.742588, 139.189376],
-    ['03', 35.744969, 139.189497],
-    ['05', 35.746153, 139.187469],
-    ['07', 35.746823, 139.185130],
-    ['09', 35.748639, 139.183521],
-    ['12', 35.752455, 139.182087],
-    ['14', 35.753593, 139.179685],
-    ['16', 35.754625, 139.178891],
-    ['19', 35.754359, 139.175916],
-    ['22', 35.753584, 139.173345],
-    ['24', 35.755613, 139.172040],
-    ['26', 35.757742, 139.171831]
-  ];
+  var riverpoints_lat = <%= @riverpoint_lat %>;
+  var riverpoints_lng = <%= @riverpoint_lng %>;
+  // rawメソッドで配列「"」のエスケープ処理をおこなわない
+  var riverpoints_num = <%= raw @riverpoint_num %>;
 
   // マーカー情報の作成
   function setMarkers(map) {
-    for (var i = 0; i < yozawa_points.length; i++) {
-      var yozawa_point = yozawa_points[i];
+    for (var i = 0; i < riverpoints_lat.length; i++) {
+      var riverpoint_lat = riverpoints_lat[i];
+      var riverpoint_lng = riverpoints_lng[i];
+      var riverpoint_num = riverpoints_num[i];
       var marker = new google.maps.Marker({
-        position: {lat: yozawa_point[1], lng: yozawa_point[2]},
+        position: {lat: riverpoint_lat, lng: riverpoint_lng},
         map: map,
         icon: {
           fillColor: "#000000",    //塗り潰し色
@@ -64,7 +56,7 @@
           strokeWeight: 0.4        //枠の透過率
         },
         label: {
-          text: yozawa_point[0],
+          text: riverpoint_num,
           color: "#5f5f5f",
           fontSize: "1em"
         }

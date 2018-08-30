@@ -9,6 +9,19 @@ class UsersController < ApplicationController
     @hunt_lng = @hunts.map{ |hun|
       hun.longitude
     } #マーカー用の経度情報の配列作成
+
+    # 渓流のポイントを地図上に表示
+    @riverpoints = Riverpoint.all
+    @riverpoint_lat = @riverpoints.map{ |ri|
+      ri.riverpoint_latitude.to_f
+    } #マーカー用の緯度情報の配列作成
+    @riverpoint_lng = @riverpoints.map{ |ri|
+      ri.riverpoint_longitude.to_f
+    } #マーカー用の経度情報の配列作成
+    @riverpoint_num = @riverpoints.map{ |ri|
+      ri.riverpoint_number
+    } #マーカー用の番号の配列作成
+
     @apikey = ENV["GOOGLEMAP_APIKEY"]
   end
 
