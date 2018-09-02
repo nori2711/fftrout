@@ -18,7 +18,7 @@
         <a class="photo" href= <%= hunt.spot_photo.url %> data-lightbox="abc" data-title="spot_photo">
           <%= image_tag hunt.spot_photo.url, alt: '',size: '60' %>
         </a>
-        <%= link_to ">詳細", "/hunts/#{hunt.id}", method: :get %>
+        <%= link_to "詳細", "/hunts/#{hunt.id}", method: :get %>
       </li>
     <% end %>
   </ul>

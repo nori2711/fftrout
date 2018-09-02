@@ -27,9 +27,8 @@
 
   <%= search_form_for @search, url: user_path do |f| %>
     <div>
-      <%= f.label "検索開始日", style: 'color: #828282; margin: 7px 0 0 0' %>
+      <%= f.label "検索開始日〜終了日", style: 'color: #828282; margin: 7px 0 0 0' %>
       <%= f.date_field :created_at_gteq, class: "form-control",style: 'width: 205px' %>
-      <%= f.label "終了日", style: 'color: #828282; margin: 7px 0 0 0' %>
       <%= f.date_field :created_at_lteq, class: "form-control",style: 'width: 205px' %>
       <%= f.label "ポイント：", style: 'color: #828282; margin: 15px 0 10px 0' %>
       <%= select_tag :river_point, options_from_collection_for_select(Riverpoint.all, :id, :riverpoint_name), :prompt => "(選択)", style:  "border: 1px solid rgba(0,0,0, 0.5)" %>
@@ -64,7 +63,7 @@
         <a class="photo" href= <%= hunt.spot_photo.url %> data-lightbox="abc" data-title="spot_photo">
           <%= image_tag hunt.spot_photo.url, alt: '',size: '60' %>
         </a>
-        <%= link_to ">詳細", "/hunts/#{hunt.id}", method: :get %>
+        <%= link_to "詳細", "/hunts/#{hunt.id}", method: :get %>
       </li>
     <% end %>
   </ul>
