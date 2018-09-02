@@ -1,5 +1,5 @@
 
-  <h2>個別釣果マップ</h2></br>
+  <h2>個別釣果マップ</h2>
 
   <style>
     #map {
@@ -14,20 +14,27 @@
   <div class="hunt_content">
     <ul>
       <li>
-        <%= @hunt.created_at+60*60*9 %></br>
+        <%= (@hunt.created_at+60*60*9).strftime("%Y/%m/%d %H:%M") %> <%= @hunt.user.nickname %></br>
         <% if @hunt.user_id == current_user.id %>
           <%= @hunt.memo %></br>
         <% end %>
-        <%= image_tag @hunt.fish_photo.url, alt: 'No image',size: '230' %>
-        <%= image_tag @hunt.fly_photo.url, alt: 'No image',size: '230' %>
-        <%= image_tag @hunt.spot_photo.url, alt: 'No image',size: '230' %>
+        <%= image_tag @hunt.fish_photo.url, alt: '',size: '230' %>
+        <%= image_tag @hunt.fly_photo.url, alt: '',size: '230' %>
+        <%= image_tag @hunt.spot_photo.url, alt: '',size: '230' %>
       </li>
     </ul>
   </div>
 
+  <div style="font-size: 12px; color: #828282; margin: 10px 5px">
+    天気：<%= @hunt.weather_main %></br>
+    気温：<%= @hunt.temp %></br>
+    気圧：<%= @hunt.pressure %></br>
+    湿度：<%= @hunt.humidity %></br>
+    風速：<%= @hunt.wind_speed %></br>
+  </div>
+
 <script>
   function initMap() {
-    var yozawa = {lat:35.751834, lng:139.179959};
     var myLatLng = {lat:<%= @hunt.latitude %>, lng:<%= @hunt.longitude %>}
     var riverpoints_lat = <%= @riverpoint_lat %>;
     var riverpoints_lng = <%= @riverpoint_lng %>;
@@ -36,7 +43,7 @@
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 14,
-      center: yozawa
+      center: myLatLng
     });
 
     var marker = new google.maps.Marker({

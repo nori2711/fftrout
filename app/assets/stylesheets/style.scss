@@ -171,9 +171,11 @@ input[type=submit] {
     }
   }
   .navbar-toggle {
-    background-color: $base !important;
+    .icon-bar {
+      background-color: $base !important;
+    }
     &:hover {
-      background-color: lighten($base, 20%) !important;
+        color: lighten($base, 20%) !important;
     }
   }
 }
@@ -296,14 +298,13 @@ input[type=submit] {
     padding: 0 3px 0 3px !important;
   }
   li {
-    margin: 4px 0px 4px 0px !important;
+    margin: 4px 3px 4px 5px !important;
     padding: 0 0 4px 0;
     list-style: none;
     font-size: 12px;
     border-bottom: 1px solid #6495ed;
   }
 }
-
 
 .header_top {
   overflow: hidden;
