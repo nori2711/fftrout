@@ -55,15 +55,15 @@
       <li>
         <%= (hunt.created_at+60*60*9).strftime("%Y/%m/%d %H:%M") %> <%= hunt.user.nickname %></br>
         <a class="photo" href= <%= hunt.fish_photo.url %> data-lightbox="abc" data-title="fish_photo">
-          <%= image_tag hunt.fish_photo.url, alt: '',size: '60' %>
+          <%= image_tag hunt.fish_photo.url, :class => "photo" %>
         </a>
         <a class="photo" href= <%= hunt.fly_photo.url %> data-lightbox="abc" data-title="fly_photo">
-          <%= image_tag hunt.fly_photo.url, alt: '',size: '60' %>
+          <%= image_tag hunt.fly_photo.url, :class => "photo" %>
         </a>
         <a class="photo" href= <%= hunt.spot_photo.url %> data-lightbox="abc" data-title="spot_photo">
-          <%= image_tag hunt.spot_photo.url, alt: '',size: '60' %>
+          <%= image_tag hunt.spot_photo.url, :class => "photo" %>
         </a>
-        <%= link_to "詳細", "/hunts/#{hunt.id}", method: :get %>
+        <%= link_to "詳細", "/hunts/#{hunt.id}", method: :get, :class => "details" %>
       </li>
     <% end %>
   </ul>
