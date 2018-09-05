@@ -53,7 +53,8 @@
   <ul>
     <% @hunts.each do |hunt| %>
       <li>
-        <%= (hunt.created_at+60*60*9).strftime("%Y/%m/%d %H:%M") %> <%= hunt.user.nickname %></br>
+        <%= (hunt.created_at+60*60*9).strftime("%Y/%m/%d %H:%M") %> <%= hunt.user.nickname %> <%= link_to ">削除", "/hunts/#{hunt.id}", method: :delete %></br>
+        <%= link_to ">メモ更新", "/hunts/#{hunt.id}/edit", method: :get %> <%= truncate(hunt.memo, length: 13) %> </br>
         <a class="photo" href= <%= hunt.fish_photo.url %> data-lightbox="abc" data-title="fish_photo">
           <%= image_tag hunt.fish_photo.url, :class => "photo" %>
         </a>

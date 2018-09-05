@@ -1,0 +1,10 @@
+<div class="posting_form top_content">
+  <h2>釣果の編集</h2>
+
+  <%= form_tag("/hunts/#{@hunt.id}", method: :patch ) do %>
+    メモ</br>
+    <textarea cols="30" name="memo" placeholder="memo" rows="5"><%= @hunt.memo %></textarea></br>
+    </br>
+    <input type="submit" value="更新">
+  <% end %>
+</div>

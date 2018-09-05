@@ -59,8 +59,30 @@ class HuntsController < ApplicationController
     @apikey = ENV["GOOGLEMAP_APIKEY"]
   end
 
+  def destroy
+    hunt = Hunt.find(params[:id])
+    if hunt.user_id == current_user.id
+      hunt.destroy
+    end
+  end
+
+  def edit
+    @hunt = Hunt.find(params[:id])
+  end
+
+  def update
+    hunt = Hunt.find(params[:id])
+    if hunt.user_id == current_user.id
+      hunt.update(hunt_update_params)
+    end
+  end
+
   private
   def hunt_params
     params.require(:hunt).permit(:fish_photo, :fly_photo, :spot_photo, :latitude, :longitude, :weather_id, :weather_main, :temp, :pressure, :humidity, :wind_speed, :wind_deg, :memo).merge(user_id: current_user.id)
+  end
+
+  def hunt_update_params
+    params.permit(:fly_photo, :spot_photo, :memo)
   end
 end
