@@ -3,7 +3,7 @@
 
   <%= form_tag("/hunts/#{@hunt.id}", method: :patch ) do %>
     メモ</br>
-    <textarea cols="30" name="memo" placeholder="memo" rows="5"><%= @hunt.memo %></textarea></br>
+    <textarea style="width: 230px" name="memo" placeholder="memo" rows="5"><%= @hunt.memo %></textarea></br>
     </br>
     <input type="submit" value="更新">
   <% end %>
