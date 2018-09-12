@@ -1,6 +1,5 @@
+<h2>釣果の登録</h2>
 <div class="posting_form top_content">
-  <h2>釣果の登録</h2>
-
   <%= form_for (@hunt) do |f| %>
     <div class="field">
       <%= f.label "魚の写真(必須)" %><%= f.file_field :fish_photo, required: true, style: 'width: 250px;height: 30px;font-size: 12px;padding: 0;margin: 0 0 15px 0' %>

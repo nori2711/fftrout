@@ -703,14 +703,22 @@ footer {
       //   font-size: 1.4em;
       //   width: 80%;
       //   line-height: 40px;
-      //   margin-top: 5px;
+        margin: 10px 10px;
       // }
       input[type="submit"] {
-        width: 18%;
+        width: 25%;
         position: relative;
         top: -5px;
       }
     }
+  }
+  .comfirm-label {
+    color: $gray;
+    border-top: solid 1px;
+  }
+  .qa-td {
+    vertical-align: top;
+    padding:5px 0 0 0;
   }
   .answerd {
     @include baseBox(10px auto ,0);
