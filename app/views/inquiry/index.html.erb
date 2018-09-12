@@ -1,0 +1,30 @@
+<h2>お問い合わせ</h2>
+
+<div class="posting_form top_content">
+  <%= form_for @inquiry, :url => inquiry_confirm_path do |f| %>
+    <% if @inquiry.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <strong>入力内容にエラーがあります</strong>
+        <ul>
+          <% @inquiry.errors.each do |attr, msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.text_field :name, autofocus: true, placeholder: 'お名前(必須)', class: 'input form-control' %>
+    </div>
+    </br>
+    <div>
+      <%= f.email_field :email, placeholder: 'メールアドレス(必須)', class: 'input form-control' %>
+    </div>
+    </br>
+    <div>
+      <%= f.text_area :message, placeholder: 'お問合せ内容', class: 'input form-control' %>
+    </div>
+    </br>
+    <%= f.submit '確認', class: 'btn btn-primary' %>
+  <% end %>
+</div>
