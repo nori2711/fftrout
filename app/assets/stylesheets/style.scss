@@ -701,7 +701,7 @@ footer {
       // input[type="text"] {
       //   border: 0;
       //   font-size: 1.4em;
-      //   width: 80%;
+        // width: 80%;
       //   line-height: 40px;
         margin: 10px 10px;
       // }
@@ -710,15 +710,15 @@ footer {
         position: relative;
         top: -5px;
       }
+      .qa-td {
+        vertical-align: top;
+        padding:5px 0 0 0;
+      }
     }
   }
   .comfirm-label {
     color: $gray;
     border-top: solid 1px;
-  }
-  .qa-td {
-    vertical-align: top;
-    padding:5px 0 0 0;
   }
   .answerd {
     @include baseBox(10px auto ,0);

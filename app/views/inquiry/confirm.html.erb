@@ -7,7 +7,9 @@
 
   <div class="comfirm-label">メールアドレス</div>
   <%= f.hidden_field :email %>
-  <%= @inquiry.email %>
+  <div style="word-wrap: break-word;">
+    <%= @inquiry.email %>
+  </div>
 
   <div class="comfirm-label">お問い合わせ内容</div>
   <%= f.hidden_field :message %>
