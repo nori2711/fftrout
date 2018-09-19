@@ -5,6 +5,7 @@
 <p><%= link_to ">釣果の登録", "/hunts/new", method: :get %><c style="font-size: 11px">(現在地情報を利用)</c></p>
 <p><%= link_to ">釣果マップを表示", "/hunts/", method: :get %></p>
 <div class="hunt_content">
+  <h4 style="border-bottom: solid 1px; margin: 8px;color: #888;">釣果タイムライン</h4>
   <ul>
     <% @hunts.each do |hunt| %>
       <li>
