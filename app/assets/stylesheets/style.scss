@@ -163,7 +163,7 @@ input[type=submit] {
     // font-size: 10px !important;
   }
   .dropdown-menu li a {
-    padding: 10px 5px;
+    padding: 5px 5px;
     color: $base !important;
     // font-size: 20px !important;
     &:hover {
@@ -306,11 +306,6 @@ input[type=submit] {
     .photo {
       width: 150px;
     }
-    @media (max-width: 630px) {
-      .photo {
-      width: 60px;
-      }
-    }
     .details {
       font-size: 14px;
       border: 1px solid $base;
@@ -318,6 +313,9 @@ input[type=submit] {
       padding: 7px 10px;
     }
     @media (max-width: 630px) {
+      .photo {
+      width: 60px;
+      }
       .details {
         font-size: 10px;
         padding: 6px 1px;
@@ -710,15 +708,15 @@ footer {
         position: relative;
         top: -5px;
       }
-      .qa-td {
-        vertical-align: top;
-        padding:5px 0 0 0;
-      }
     }
   }
   .comfirm-label {
     color: $gray;
     border-top: solid 1px;
+  }
+  .qa-td {
+    vertical-align: top;
+    padding:5px 0 0 0;
   }
   .answerd {
     @include baseBox(10px auto ,0);
