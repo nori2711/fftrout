@@ -20,11 +20,13 @@
 
   <%= search_form_for @search do |f| %>
     <div>
-      <%= f.label "検索開始日〜終了日", style: 'color: #828282; margin: 7px 0 0 0' %>
+      <%= f.label "検索開始日〜終了日", style: 'color: #828282; margin: 7px 0 0 0' %></br>
       <%= f.date_field :created_at_gteq, class: "form-control", style: 'width: 205px' %>
       <%= f.date_field :created_at_lteq, class: "form-control", style: 'width: 205px' %>
-      <%= f.label "ポイント：", style: 'color: #828282; margin: 15px 0 10px 0' %>
-      <%= select_tag :river_point, options_from_collection_for_select(Riverpoint.all, :id, :riverpoint_name), :prompt => "(選択)", style:  "border: 1px solid rgba(0,0,0, 0.5)" %>
+      <%= f.label "ポイント:", style: 'color: #828282; margin: 15px 0 10px 0' %>
+      <%= select_tag :river_point, options_from_collection_for_select(@riverpoint, :id, :riverpoint_name), :prompt => "(選択)" %></br>
+      <%= f.label "天気：", style: 'color: #828282; margin: 0px 0 5px 0' %>
+      <%= f.collection_check_boxes :weather_main_in, @weather, :weather_main, :weather_name %></br>
     </div>
     <div class="action">
       <%= f.submit "検索", class: "btn btn--block" do %>

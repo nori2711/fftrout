@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180826071259) do
+ActiveRecord::Schema.define(version: 20180922051142) do
 
   create_table "hunts", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -63,5 +63,12 @@ ActiveRecord::Schema.define(version: 20180826071259) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "weathers", force: :cascade do |t|
+    t.string   "weather_main", limit: 255
+    t.string   "weather_name", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

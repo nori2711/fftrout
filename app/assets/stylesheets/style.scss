@@ -670,7 +670,6 @@ footer {
   }
 }
 
-
 .top_content {
   @include baseBox(10px auto 20px,10px);
   background-color: rgba(#fff,0.93);
@@ -692,6 +691,10 @@ footer {
       font-size: .8em;
       display: block;
     }
+  }
+  .form-field {
+    margin: 0 0 5px 0;
+    display: flex;
   }
   &.posting_form {
     margin-top: 20px;
