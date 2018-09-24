@@ -24,51 +24,9 @@
     }
   </style>
   <div id="map"></div>
-
-  <%= search_form_for @search, url: user_path do |f| %>
-    <div>
-      <%= f.label "検索開始日〜終了日", style: 'color: #828282; margin: 7px 0 0 0' %>
-      <%= f.date_field :created_at_gteq, class: "form-control",style: 'width: 205px' %>
-      <%= f.date_field :created_at_lteq, class: "form-control",style: 'width: 205px' %>
-      <%= f.label "ポイント：", style: 'color: #828282; margin: 15px 0 10px 0' %>
-      <%= select_tag :river_point, options_from_collection_for_select(Riverpoint.all, :id, :riverpoint_name), :prompt => "(選択)", style:  "border: 1px solid rgba(0,0,0, 0.5)" %>
-    </div>
-    <div class="action">
-      <%= f.submit "検索", class: "btn btn--block" do %>
-      <% end %>
-      <%= link_to '>検索条件クリア', user_path %>
-    </div>
-  <% end %>
 </div>
 
-<div style="font-size: 12px; color: #828282">
-  ＜検索について＞</br>
-  日付の基準は00:00です</br>
-  2018/8/1の1日だけ検索する場合は2018/8/1〜2018/8/2と入力</br>
-  ポイントは周辺約200mで検索します</br>
-  </br>
-</div>
-
-<div class="hunt_content">
-  <ul>
-    <% @hunts.each do |hunt| %>
-      <li>
-        <%= (hunt.created_at).strftime("%Y/%m/%d %H:%M") %> <%= link_to ">釣果削除", "/hunts/#{hunt.id}", method: :delete, data: { confirm: '釣果を削除しますか？' } %></br>
-        <%= link_to ">メモ更新", "/hunts/#{hunt.id}/edit", method: :get %> <%= truncate(hunt.memo, length: 10) %> </br>
-        <a class="photo" href= <%= hunt.fish_photo.url %> data-lightbox="abc" data-title="fish_photo">
-          <%= image_tag hunt.fish_photo.url, :class => "photo" %>
-        </a>
-        <a class="photo" href= <%= hunt.fly_photo.url %> data-lightbox="abc" data-title="fly_photo">
-          <%= image_tag hunt.fly_photo.url, :class => "photo" %>
-        </a>
-        <a class="photo" href= <%= hunt.spot_photo.url %> data-lightbox="abc" data-title="spot_photo">
-          <%= image_tag hunt.spot_photo.url, :class => "photo" %>
-        </a>
-        <%= link_to "詳細", "/hunts/#{hunt.id}", method: :get, :class => "details" %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<%= render "common/search" %>
 
 <script>
   function initMap() {
