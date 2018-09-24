@@ -695,6 +695,7 @@ footer {
   .form-field {
     margin: 0 0 5px 0;
     display: flex;
+    flex-wrap: wrap;
   }
   &.posting_form {
     margin-top: 20px;
