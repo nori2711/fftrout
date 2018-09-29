@@ -2,16 +2,29 @@
 <div class="posting_form top_content">
   <%= form_for (@hunt) do |f| %>
     <div class="field">
-      <%= f.label "魚の写真(必須)" %><%= f.file_field :fish_photo, required: true, style: 'width: 250px;height: 30px;font-size: 12px;padding: 0;margin: 0 0 15px 0' %>
+      <%= f.label "魚の写真(必須)" %>
     </div>
+    <div class="file">
+      <%= f.file_field :fish_photo %>
+      <div id="fish_preview">選択してください</div>
+    </div>
+
     <div class="field">
       <%= f.label "フライの写真" %></br>
-      <%= f.file_field :fly_photo, style: 'width: 250px;height: 30px;font-size: 12px;padding: 0;margin: 0 0 15px 0' %>
     </div>
+    <div class="file">
+      <%= f.file_field :fly_photo %>
+      <div id="fly_preview">選択してください</div>
+    </div>
+
     <div class="field">
       <%= f.label "場所の写真" %></br>
-      <%= f.file_field :spot_photo, style: 'width: 250px;height: 30px;font-size: 12px;padding: 0;margin: 0 0 15px 0' %>
     </div>
+    <div class="file">
+      <%= f.file_field :spot_photo %>
+      <div id="spot_preview">選択してください</div>
+    </div>
+
     <div class="field">
       <%= f.label "メモ" %></br>
       <%= f.text_area :memo, style: 'width: 230px;height: 45px;font-size: 12px;padding: 0;margin: 0 0 15px 0' %>
@@ -97,4 +110,39 @@
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= @apikey %>&callback=initMap">
+</script>
+
+<script type="text/javascript">
+  // fish_photoの変更により関数実行
+  var fishFileRef = document.getElementById('hunt_fish_photo');
+  fishFileRef.addEventListener('change', fishDisplayFileName);
+  // fly_photoの変更により関数実行
+  var flyFileRef = document.getElementById('hunt_fly_photo');
+  flyFileRef.addEventListener('change', flyDisplayFileName);
+  // spot_photoの変更により関数実行
+  var spotFileRef = document.getElementById('hunt_spot_photo');
+  spotFileRef.addEventListener('change', spotDisplayFileName);
+
+  // 選択されたfish_photoのファイル名を取得しpreviewに表示
+  function fishDisplayFileName() {
+    var outFrame = document.getElementById('fish_preview');
+    for (i = 0; i < fishFileRef.files.length; i++) {
+      outFrame.innerHTML = "選択済 " + fishFileRef.files[i].name +"<br/>";
+    }
+  }
+  // 選択されたfly_photoのファイル名を取得しpreviewに表示
+  function flyDisplayFileName() {
+    var outFrame = document.getElementById('fly_preview');
+    for (i = 0; i < flyFileRef.files.length; i++) {
+      outFrame.innerHTML = "選択済 " + flyFileRef.files[i].name +"<br/>";
+    }
+  }
+  // 選択されたspot_photoのファイル名を取得しpreviewに表示
+  function spotDisplayFileName() {
+    var outFrame = document.getElementById('spot_preview');
+    for (i = 0; i < spotFileRef.files.length; i++) {
+      outFrame.innerHTML = "選択済 " + spotFileRef.files[i].name +"<br/>";
+    }
+  }
+
 </script>
