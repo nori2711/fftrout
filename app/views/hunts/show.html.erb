@@ -15,8 +15,10 @@
     <ul>
       <li>
         <%= (@hunt.created_at).strftime("%Y/%m/%d %H:%M") %> <%= @hunt.user.nickname %></br>
+        フライ種類:<%= @flyname %></br>
         <% if @hunt.user_id == current_user.id %>
-          <%= @hunt.memo %> <%= link_to ">メモ更新", "/hunts/#{@hunt.id}/edit", method: :get %></br>
+          メモ:<%= @hunt.memo %></br>
+          <%= link_to ">更新(フライ種類,メモ)", "/hunts/#{@hunt.id}/edit", method: :get %></br>
           <%= link_to ">釣果削除", "/hunts/#{@hunt.id}", method: :delete, data: { confirm: '釣果を削除しますか？' } %></br>
         <% end %>
         <%= image_tag @hunt.fish_photo.url, alt: '',size: '230' %>
