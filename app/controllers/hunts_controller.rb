@@ -56,12 +56,16 @@ class HuntsController < ApplicationController
 
   def show
     @hunt = Hunt.find(params[:id])
-    @flyname = Flytype.find_by(flyclass: @hunt.flyclass).flyname
 
     #ポイントのマーカー情報作成（application_controllerで定義）
     river_point_marker_create
 
     @apikey = ENV["GOOGLEMAP_APIKEY"]
+
+    # フライ判定済であればフライ種類名をビューに渡す
+    if @hunt.flyclass.present?
+      @flyname = Flytype.find_by(flyclass: @hunt.flyclass).flyname
+    end
   end
 
   def destroy
