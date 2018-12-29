@@ -2,9 +2,29 @@
   <h2>釣果の編集</h2>
 
   <%= form_tag("/hunts/#{@hunt.id}", method: :patch ) do %>
+    フライ種類判定(種類:予測値)</br>
+    <% [[@predicted1, @percentage1, @flyname1], [@predicted2, @percentage2, @flyname2], [@predicted3, @percentage3, @flyname3], [@predicted90, @percentage99, @flyname90], [@predicted91, @percentage99, @flyname91], [@predicted92, @percentage99, @flyname92], [@predicted99, @percentage99, @flyname99]].each do |predicted, percentage, flyname| %>
+      <input id="flyclass" name="flyclass" type="radio" value="<%= predicted %>"
+      <% if predicted == @predicted1 %>checked<% end %>>
+      <label for="flyclass"><%= flyname %>：<%= percentage %></label></br>
+    <% end %>
+    </br>
     メモ</br>
     <textarea style="width: 230px" name="memo" placeholder="memo" rows="5"><%= @hunt.memo %></textarea></br>
     </br>
+
     <input type="submit" value="更新">
   <% end %>
+</div>
+
+<div style="font-size: 12px; color: #828282; margin: 10px 5px">
+＜写真から判定するフライ＞</br>
+ダウンウィング：エルクヘアカディスのようなウィング形状のフライ</br>
+パラシュート：パラシュート形状のフライ</br>
+ニンフ：ニンフフライ</br>
+＜その他のフライ＞</br>
+スタンダード：アダムスなどのスタンダードフライ</br>
+アッパーウィング：クリップルを含むアップサイドウィング形状のフライ</br>
+ウェットフライ：ウェットフライ</br>
+その他：その他のフライ</br>
 </div>

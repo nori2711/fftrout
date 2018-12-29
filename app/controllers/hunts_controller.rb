@@ -48,7 +48,7 @@ class HuntsController < ApplicationController
   def create
     @hunt = Hunt.new(hunt_params, temp: @temp)
     if @hunt.save
-      redirect_to "/", success: "釣果の登録が完了しました"
+      redirect_to "/hunts/#{@hunt.id}/edit"
     else
       render "new"
     end
@@ -56,6 +56,7 @@ class HuntsController < ApplicationController
 
   def show
     @hunt = Hunt.find(params[:id])
+    @flyname = Flytype.find_by(flyclass: @hunt.flyclass).flyname
 
     #ポイントのマーカー情報作成（application_controllerで定義）
     river_point_marker_create
@@ -72,6 +73,43 @@ class HuntsController < ApplicationController
 
   def edit
     @hunt = Hunt.find(params[:id])
+    @flytypes = Flytype.all
+    if @hunt.fly_photo.present?
+      # フライ識別APIにrequestしてresponseを受け取る
+      uri = URI.parse("https://aqueous-basin-70922.herokuapp.com/fly/files")
+      request = Net::HTTP::Post.new(uri)
+      request.set_form_data(
+        "filename" => @hunt["fly_photo"],
+        "photoid" => @hunt.id,
+      )
+      req_options = {
+        use_ssl: uri.scheme == "https",
+      }
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+      result = JSON.parse(response.body)
+      @predicted1 = result['predicted1']
+      @predicted2 = result['predicted2']
+      @predicted3 = result['predicted3']
+      @percentage1 = result['percentage1']
+      @percentage2 = result['percentage2']
+      @percentage3 = result['percentage3']
+      # その他の選択肢
+      @predicted90 = 'standard'
+      @predicted91 = 'upper-wing'
+      @predicted92 = 'wet'
+      @predicted99 = 'others'
+      @percentage99 = 'ー'
+      # フライ種類の名前
+      @flyname1 = Flytype.find_by(flyclass: @predicted1).flyname
+      @flyname2 = Flytype.find_by(flyclass: @predicted2).flyname
+      @flyname3 = Flytype.find_by(flyclass: @predicted3).flyname
+      @flyname90 = Flytype.find_by(flyclass: @predicted90).flyname
+      @flyname91 = Flytype.find_by(flyclass: @predicted91).flyname
+      @flyname92 = Flytype.find_by(flyclass: @predicted92).flyname
+      @flyname99 = Flytype.find_by(flyclass: @predicted99).flyname
+    end
   end
 
   def update
@@ -87,6 +125,6 @@ class HuntsController < ApplicationController
   end
 
   def hunt_update_params
-    params.permit(:fly_photo, :spot_photo, :memo)
+    params.permit(:fly_photo, :spot_photo, :memo, :flyclass)
   end
 end

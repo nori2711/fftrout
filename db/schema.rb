@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180922051142) do
+ActiveRecord::Schema.define(version: 20181229051610) do
+
+  create_table "flytypes", force: :cascade do |t|
+    t.integer  "fly_id",     limit: 4
+    t.string   "flyclass",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "flyname",    limit: 255
+  end
 
   create_table "hunts", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -30,6 +38,7 @@ ActiveRecord::Schema.define(version: 20180922051142) do
     t.text     "memo",         limit: 65535
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "flyclass",     limit: 255
   end
 
   create_table "riverpoints", force: :cascade do |t|
